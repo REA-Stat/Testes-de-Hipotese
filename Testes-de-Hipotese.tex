@@ -1,0 +1,585 @@
+% !TeX spellcheck = pt_BR
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass[12pt,a4paper]{article}
+
+% TROCAR PELO SEU PRÓPRIO NOME:
+\newcommand{\myauthor}{Leonardo~T.~Rolla}
+
+% TROCAR PELO SEU PRÓPRIO REPOSITÓRIO:
+%\newcommand{\mysourceurl}{\url{https://github/xxxxxxxxxx}}
+\newcommand{\mysourceurl}{\url{https://github.com/rea-stat/Testes-de-Hipotese} e \url{https://www.overleaf.com/read/dkbvxdjftbbd}}
+
+\usepackage[brazil]{babel}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+%\usepackage{chngcntr}
+\usepackage{dsfont}
+\usepackage[shortlabels]{enumitem}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{icomma}
+\usepackage{mathrsfs}  
+\usepackage{microtype}
+\usepackage{verbatim}
+\usepackage[dvipsnames]{xcolor}
+
+\usepackage{upquote}
+
+\theoremstyle{plain}
+\newtheorem{theorem}[equation]{Teorema}
+\newtheorem{proposition}[equation]{Proposição}
+\newtheorem{lemma}[equation]{Lema}
+\newtheorem{corollary}[equation]{Corolário}
+\newtheorem{axiom}[equation]{Axioma}
+\theoremstyle{definition}
+\newtheorem{definition}[equation]{Definição}
+\newtheorem*{definition*}{Definição}
+\theoremstyle{remark}
+\newtheorem{examplex}[equation]{Exemplo}
+\newtheorem{counterexamplex}[equation]{Contra-exemplo}
+\newtheorem{exercisex}[equation]{Exercício}
+\newtheorem{comentario}[equation]{Comentário}
+\newtheorem{remarkx}[equation]{Observação}
+\newtheorem*{remark*}{Observação}
+
+\newenvironment{example}{\pushQED{\qed}\renewcommand{\qedsymbol}{\scriptsize$\triangle$}\examplex}{\popQED\endexamplex}
+\newenvironment{counterexample}{\pushQED{\qed}\renewcommand{\qedsymbol}{\scriptsize$\triangle$}\counterexamplex}{\popQED\endcounterexamplex}
+\newenvironment{exercise}{\pushQED{\qed}\renewcommand{\qedsymbol}{\scriptsize$\triangle$}\exercisex}{\popQED\endexercisex}
+\newenvironment{remark}{\pushQED{\qed}\renewcommand{\qedsymbol}{\scriptsize$\triangle$}\remarkx}{\popQED\endremarkx}
+
+\geometry{margin=25mm,centering,a4paper}
+
+\setlist{topsep=0em, partopsep=.5em, itemsep=0pt, noitemsep}
+\setlist[enumerate,1]{label=\rm(\alph*)}
+\setlist[enumerate,2]{label=(\roman*)}
+
+\hypersetup{
+hidelinks,
+colorlinks,
+urlcolor=[rgb]{0,0,.7},
+linkcolor=[rgb]{.4,0,0},
+citecolor=[rgb]{0,.3,0},
+pdfstartview=FitH,
+pdfpagemode=UseNone
+}
+
+\renewcommand{\baselinestretch}{1.1}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{.4em}
+
+\renewcommand*{\url}[1]{\href{{#1}}{\sf\footnotesize\detokenize{#1}}}
+
+\graphicspath{{figures/}}
+
+\usepackage[main,input,include]{embedall}
+%Use \embedfile{xxx.pdf} to manually embed figures!
+
+\begin{document}
+
+
+\title{Testes de Hipótese}
+\author{\myauthor}
+\maketitle
+
+\thispagestyle{empty}
+
+
+\cleardoublepage
+
+
+%\vspace*{\fill}
+
+\noindent
+\copyright\
+2023--{\the\year}
+Departamento de Estatística, IME-USP.
+\\
+
+\vspace{1em}
+
+\hfil
+\href{https://creativecommons.org/licenses/by-sa/4.0/deed.pt_BR}{\includegraphics[height=4.2em]{by-sa.pdf}}
+\embedfile{figures/by-sa.pdf}
+
+\vspace{1em}
+
+\noindent
+Todos os direitos reservados.
+Permitido o uso nos termos licença Creative Commons Atribuição-CompartilhaIgual 4.0 Internacional.
+
+\vspace{1em}
+
+\textbf{Reutilização deste material}
+\\
+\noindent
+Você pode remixar, transformar, e criar a partir do material para qualquer fim, mesmo que comercial.
+Nesse caso, tem de distribuir as suas contribuições sob a mesma licença que o original.
+Você não pode aplicar termos jurídicos ou medidas de caráter tecnológico que restrinjam legalmente outros de fazerem algo que a licença permita.
+
+\vspace{1em}
+
+\textbf{Atribuição}
+\\
+\noindent
+Este material foi produzido originalmente por Leonardo~T.~Rolla (IME-USP), como parte do projeto \emph{REA-Stat -- Recursos Educacionais Abertos de Estatística}
+(\url{https://rea-stat.github.io/}).
+
+\vspace{1em}
+
+\textbf{Código-fonte}
+\\
+\noindent
+O código-fonte deste material está disponível em:
+\\
+\mysourceurl
+
+
+\vspace{1em}
+
+\textbf{Aviso legal}
+\\
+\noindent
+As pessoas e instituições aqui mencionadas não endossam a qualidade deste material e as opiniões nele contido, nem explícita nem implicitamente.
+
+\noindent
+Qualquer erro contido neste material é responsabilidade de: \myauthor.
+
+\vspace{1em}
+
+\hfill
+\today
+
+\vfill
+\vfill
+
+\thispagestyle{empty}
+
+
+\cleardoublepage
+
+
+\section{Testes de hipótese para uma proporção}
+
+Começamos com alguns exemplos para ir introduzindo os principais conceitos envolvidos.
+
+\begin{example}
+Numa cidade do interior, todos os administradores de estabelecimento com piscinas de bolinhas para crianças compram as bolinhas da Sra.~Mariana, uma mulher bem sucedida que há vários anos está à frente de uma distribuidora desses produtos.
+Das bolinhas vendidas pela distribuidora, $70\%$ são de cores bonitas e vivas (azul, verde, preto, laranja, vermelho, fúcsia, violeta, branco, etc.), e as restantes são um pouco menos vivas e bonitas (manchadas, acinzentadas, etc.).
+Pelo menos é isso o que Sra.~Mariana sempre disse, e os empresários da região sempre acreditaram.
+
+Um dia, o Sr.~Rubens descobriu que havia uma outra indústria que fabricava um produto muito parecido, porém com qualidade um pouco inferior, tendo apenas $60\%$ das bolas em cores vivas, e começou a suspeitar que a Sra.~Mariana estava distribuindo o produto dessa nova indústria.
+Depois de muito hesitar, o Sr.~Rubens eventualmente decidiu compartilhar sua preocupação com os demais empresários da cidade.
+
+Para colocar à prova a premissa de que a Sra.~Mariana vinha cumprindo com os parâmetros prometidos, a comunidade decidiu que deveriam tomar $n=1.000$ amostras ao acaso de um grande lote de bolinhas, e observar quantas seriam de cores vivas.
+Assim, definiu-se a estatística
+\[
+\hat{p} = \frac{\text{número de bolas de cores vivas}}{n}
+\]
+e decidiu-se pelo seguinte procedimento.
+Se $\hat{p} \leq 0,65$, confirmariam-se as suspeitas do Sr.~Rubens, rejeitando a premissa de que $70\%$ das bolas eram de cores vivas.
+Do contrário, se $\hat{p}>0,65$, a reputação da Sra.~Mariana continuaria inabalada.
+
+A Sra.~Mariana fez seus cálculos e concluiu que a probabilidade de que fosse cometida uma injustiça contra ela era menor do que $0,1\%$.
+Quer dizer, supondo que $p=0,7$, ela calculou $P(\hat{p} \leq 0,65) < 0,001$.\footnote{Os cálculos feitos aqui usam a aproximação de $\hat{p}$ por uma normal. Os próximos exemplos dão mais detalhes desse método, e os cálculos feitos em R são exibidos ao final desta seção.}
+Assim sendo, a Sra.~Mariana não se opôs à realização do experimento.
+Por sua vez, o Sr.~Rubens fez outros cálculos e observou que, caso sua suspeita fosse verdadeira, as chances de que não fossem confirmadas também seriam menores que $0,1\%$.
+Quer dizer, supondo que $p=0,6$, ele calculou $P(\hat{p} > 0,65) < 0,001$.
+Assim sendo, o Sr.~Rubens tampouco se opôs à realização do experimento.
+Dessa forma, a situação foi resolvida sem grandes controvérsias: bastaria fazer a amostra e decidir a partir dela, com um critério bem claro.
+\end{example}
+
+O exemplo acima apresentou uma situação muito típica: acreditava-se em uma determinada hipótese, até que eventualmente decidiu-se que ela deveria ser posta à prova.
+A hipótese aceita até então recebe o nome de \emph{hipótese nula}, que agora passaria a ser desafiada por uma \emph{hipótese alternativa}.
+O experimento planejado e o critério de decisão adotados foram muito claros.
+Nesse exemplo, o critério de decisão não gerou nenhum dilema importante.
+Porém, isso só foi possível graças a um grande dispêndio de recursos, o que muitas vezes é impossível, inviável ou indesejado.
+Numa situação um pouco mais realística, começamos a perceber alguns conflitos e ter que tomar decisões em face de dilemas consideráveis.
+
+\begin{example}
+Continuando o exemplo anterior, a comunidade eventualmente percebeu que não tinha os recursos necessários para amostrar e analisar $1.000$ bolinhas, e pensou em fazer o mesmo experimento, porém com apenas $n=100$ amostras.
+
+Ao saber disso, a Sra.~Mariana imediatamente fez as contas, obtendo $P(\hat{p} \leq 0,65) = 0,14$. Como esperado, ela protestou, pois considerou injusto ficar à mercê de um procedimento aleatório com chances consideráveis de manchar sua reputação injustamente.
+
+Algumas pessoas imediatamente fizeram um outro cálculo e descobriram que, para que as chances de cometer uma injustiça continuassem menores que $0,001$, teriam que adotar o nível de corte como sendo $0,558$ ao invés de $0,65$.
+Mas isso lhes pareceu inadequado, pois, supondo que $p=0,6$, teríamos $P(\hat{p} > 0,558) = 0,80$.
+Ou seja, mesmo se as suspeitas do Sr.~Rubens estivessem corretas, haveria $80\%$ de probabilidade de que elas não fossem confirmadas.
+Isso comprometeria muito as chances de que o teste tivesse alguma utilidade.
+
+Chamaram então o filho do Sr.~Januário, que na época estudava numa universidade na capital e já havia até cursado algumas disciplinas de Estatística.
+O filho do Sr.~Januário disse que teriam que tomar como critério $\hat{p} \leq 0,625$ para rejeitar a premissa de honestidade da Sra.~Mariana.
+Ela imediatamente fez as contas, e disse que isso ainda lhe parecia um pouco injusto, pois haveria uma probabilidade $0,05$ de que a premissa fosse rejeitada incorretamente.
+O filho do Sr.~Januário disse que não tinha muito o que fazer, que esse procedimento é inerentemente aleatório, e que $\alpha=0,05$ lhe parecia apropriado neste caso.
+Os empresários não haviam cursado Estatística na universidade mas eram bastante espertos, e indagaram qual a justificativa desse valor de $\alpha=0,05$.
+O filho do Sr.~Januário não soube explicar, disse que está bem fazer desse jeito e que é assim mesmo que se faz.
+Eventualmente, a Sra.~Mariana se resignou e consentiu.
+
+A essa altura, já podemos imaginar que quem protestou foi o Sr.~Rubens.
+Ele disse que, se suas suspeitas fossem bem fundadas, ainda assim haveria probabilidade $31\%$ de que o teste não as confirmasse.
+O filho do Sr.~Januário disse que não podia fazer nada a respeito, explicando que esse valor, denotado por $\beta$, era menos importante, e que o procedimento deveria, em primeiro lugar, reduzir as chances de que uma injustiça fosse cometida contra a reputação da Sra.~Mariana.
+Como consolo, o filho do Sr.~Januário disse que, apesar de que o valor de $\alpha$ já tinha sido fixado e não deveria ser questionado, seria possível diminuir o valor de $\beta$ tomando-se uma amostra maior do que $n=100$.
+Ao final, ele sugeriu ao Sr.~Rubens não se focar muito no valor de $\beta$, e sim no seu complementar, ou seja, os $69\%$ de chance que ele terá de ver suas suspeitas confirmadas, caso sejam verdadeiras.
+
+Antes de encerrar a discussão e proceder à amostragem, o filho do Sr.~Januário achou importantíssimo enfatizar que tipo de interpretação poderíamos fazer do resultado desse teste.
+Ele esclareceu que, após a realização da amostra, haveria duas possibilidades bem distintas em sua natureza.
+Na primeira possibilidade, de $\hat{p} \leq 0,625$, ficaria estabelecido que \emph{houve suficiente evidência estatística} para rejeitar a premissa de que $70\%$ das bolinhas da Sr.~Mariana eram de cores vivas.
+Na segunda possibilidade, de $\hat{p} > 0,625$, ficaria estabelecido que \emph{não houve suficiente evidência estatística} para rejeitar a premissa.
+Nenhuma das duas possibilidades resultaria na \emph{aceitação} ou \emph{confirmação} da premissa original, muito menos permitiria rejeitar a hipótese alternativa.
+Essas ponderações o deixaram o Sr.~Rubens bem mais tranquilo.
+Os empresários da região se sentiram muito melhor esclarecidos e agradeceram pela explicação.
+\end{example}
+
+O desenvolvimento acima tornou a estória muito mais interessante, revelando certos conflitos e fazendo transparecer muito mais a assimetria inerente a um teste de hipótese.
+
+Vejamos o contraste entre as hipóteses:
+
+\textbf{Hipótese nula} (``$H_0$''): afirmação sobre o parâmetro $p$, ligada a um valor de referência, um especificação padrão ou histórica. É a hipótese nula que estamos colocando à prova.
+
+\textbf{Hipótese alternativa}  (``$H_1$''): é a hipótese que pode ser considerada aceitável, caso $H_0$ seja rejeitada; afirmação que suspeitamos ser verdadeira sobre a variável em questão.
+
+O resultado do teste se limita a dizer se houve ou não suficiente evidência estatística para rejeitar $H_0$, sem jamais analisar o mérito específico de $H_1$.
+Devido a flutuações aleatórias inerentes ao processo de amostragem, a estatística $\hat{p}$ dificilmente será exatamente igual ao seu valor médio previsto por $H_0$, mesmo que essa hipótese seja verdadeira.
+Considerando o tamanho típico das flutuações de $\hat{p}$ que esperaríamos observar sob a hipótese nula, diremos que há suficiente evidência estatística para rejeitar tal hipótese quando a discrepância observada for atipicamente grande.
+Caso as flutuações não sejam atipicamente grandes para $H_0$, geralmente não poderemos concluir nada sobre $H_0$, $H_1$, ou qualquer hipótese a respeito da variável em questão, e diremos simplesmente que $H_0$ não foi rejeitada.
+
+A partir dessa perspectiva, podemos analisar melhor as preocupações envolvidas num teste de hipótese, e observar as diferenças em natureza e importância que há entre elas.
+
+O \textbf{erro tipo I} consiste em rejeitar a hipótese nula quando ela é verdadeira. Esse erro corresponde a uma \emph{falsa descoberta}. Este é o erro mais grave.
+O \textbf{erro tipo II} consiste em não rejeitar a hipótese nula, mesmo ela sendo falsa. Esse erro corresponde à \emph{perda de oportunidade} de se fazer uma descoberta, por falta de suficiente evidência estatística.
+
+Resumimos os possíveis resultados de um teste de hipótese na tabela abaixo:
+\begin{table}[H]
+\centering
+\begin{tabular}{||c|c|c||}
+\hline
+\hline
+Situação & Rejeitamos $H_0$ & Não rejeitamos $H_0$
+\\
+\hline
+$H_0$ é verdadeira & erro tipo I & sem erro
+\\
+\hline
+$H_0$ é falsa & sem erro & erro tipo II
+\\
+\hline
+\hline
+\end{tabular}
+\end{table}
+
+Antes de realizar o teste, vamos fixar de antemão um parâmetro que corresponderá à probabilidade de que ocorra um erro do tipo I.
+Essa probabilidade, denotada pela letra $\alpha$, é chamada de \textbf{nível de significância} do teste.
+De forma mais precisa, $\alpha$ é a probabilidade de se rejeitar $H_0$ no caso em que $H_0$ seja verdadeira.
+Uma vez fixado o valor de $\alpha$, usamos a hipótese $H_0$ e o número $n$ de amostras para planejar o teste. No exemplo acima, o limiar que separaria a rejeição da não-rejeição foi calculado dessa forma (os cálculos não foram feitos explicitamente, alguma explicação será dada no próximo exemplo).
+
+Observamos que o teste ``protege'' a hipótese nula através da escolha de um parâmetro $\alpha$ pequeno.
+Este valor deve ser fixado antes da coleta da amostra.
+Dependendo da gravidade do erro de tipo~I, $\alpha$ costuma ser fixado como
+$0,05$, $0,01$, ou $0,001$.
+Como vimos no exemplo acima, a escolha do $\alpha$ é, de certa forma, arbitrária.
+Uma vez fixado o valor de $\alpha$, o ``ônus da prova'' ficará com $H_1$, pois a amostra deverá fornecer evidência estatística suficientemente forte para que o teste seja conclusivo na direção de rejeitar $H_0$.
+Isso pode ser muito difícil, sobretudo se $\alpha$ for muito pequeno ou o número $n$ de amostras não for grande o suficiente..
+Por outro lado, quanto menor o valor de $\alpha$, mais significante será uma amostra que leve à rejeição de $H_0$. Isso se deve ao fato de que, à medida em que diminuímos o valor $\alpha$, mais a amostra tem que ser incompatível com $H_0$ para levar à rejeição.
+
+Vimos também no final do exemplo algumas limitações com respeito às conclusões que poderemos tirar de um teste de hipótese.
+Ao rejeitar a hipótese nula, nunca vamos saber com certeza absoluta se estamos fazendo uma descoberta legítima ou cometendo um erro do tipo I.
+Ao não rejeitar a hipótese nula, nunca vamos saber com certeza se estamos deixando de fazer uma descoberta por causa do rigor científico de haver fixado um $\alpha$ muito baixo, ou se a hipótese nula é realmente adequada para modelar a variável em questão.
+Em todo caso, o teste nunca servirá para confirmar $H_0$ nem para rejeitar $H_1$.
+
+Também vimos que prefere-se falar de \textbf{poder} do teste, que é a probabilidade de se fazer uma descoberta no caso em que $H_1$ é verdadeira, ao invés do seu complementar, que é a probabilidade de erro tipo II.
+O poder é representado pela letra $\pi$ e é dado por $\pi = 1-\beta$.
+Uma vez que $\alpha$ está fixado, geralmente podemos aumentar o poder do teste tomando um número maior de amostras.
+
+Agora que já falamos de hipóteses nula e alternativa, do significado de rejeitar ou não rejeitar $H_0$, da diferença entre os erros de tipo I e tipo II, do nível de significância $\alpha$ e do poder $\pi$ de um teste, vamos introduzir mais alguns conceitos, novamente em forma de exemplo.
+
+\begin{example}
+Sabe-se que a proporção de machos em uma determinada espécie de peixes é de 42\%. Uma bióloga desconfia que, devido a uma alteração na composição bioquímica de um lago, essa proporção é maior.
+Assim sendo, temos
+\[
+H_0:p=0,42
+\qquad
+H_1:p>0,42
+.
+\]
+Para testar sua conjectura, a bióloga decidiu que iria capturar $n=200$ peixes, observar o sexo deles, calcular a proporção $\hat{p}$ de machos nessa amostra, e comparar com algum nível de corte pré-estabelecido.
+
+Com um nível de significância de 5\%, ela calculou o ponto de corte, que ela chamou ``valor crítico'' como sendo $p_c=0,477$, e decidiu que iria rejeitar a hipótese nula caso $\hat{p} \geq 0,477$.
+Para encontrar esse valor de $p_c$, ela usou o fato de que
+\[
+\hat{p}
+\approx
+p + Z \cdot \sqrt{\frac{p(1-p)}{n}}
+\]
+onde $Z$ representa uma normal padrão.
+Como $P(Z\geq z_c)=0,05$ para $z_c = 1,645$, ela substituiu o valor de $z$ na igualdade acima, obtendo
+\[
+p_c
+=
+p + z_c \cdot \sqrt{\frac{p(1-p)}{n}}
+=
+0,477
+.
+\]
+
+Assim, o critério de decisão ficou sendo o seguinte: fixou-se previamente o intervalo $[0,477; 1]$, ao que a bióloga chamou de ``região crítica'', e, após fazer a amostragem, deveria-se rejeitar a hipótese de que $p=0,42$ no caso em que $\hat{p}$ estivesse nesse intervalo.
+
+Perguntando-se sobre o poder desse teste, ela percebeu que não teria como calculá-lo, pois não sabia qual o valor de $p$ deveria considerar, dentre todas as possibilidades que compõem a hipótese alternativa. No máximo, poderia esboçar o gráfico de como seria o poder $\pi$ para distintos de $p$, obtendo a figura abaixo:
+
+\hfil \includegraphics[width=.5\textwidth]{poder1}
+\embedfile{figures/poder1.pdf}
+
+Para calcular o valor de $\pi(p)$, ela usou a fórmula
+\[
+\pi(p) = P_p(\hat{p} \geq p_c) \approx P\Big(Z \geq \frac{p_c-p}{\sqrt{\frac{p(1-p)}{n}}}\Big)
+\]
+e com isso construiu o gráfico acima.
+Os valores de $p \leq 0,42$ que aparecem no gráfico não fazem parte da hipótese alternativa.
+Quando $p$ se aproxima de $0,42$, o poder do teste se aproxima de $\alpha$, como indicado no gráfico acima.
+Isso corresponde ao fato de que $\alpha$ é justamente a probabilidade de que se rejeite a hipótese nula no caso em que $p=0,42$.
+
+Ao fazer a amostra, a bióloga contou $93$ machos dentre os $200$ peixes amostrados.
+Assim, calculou $\hat{p}_{\mathrm{obs}}=0,465$.
+Como $0,465<0,477$, ela observou que, supondo a hipótese nula $p=0,42$ como verdadeira, a diferença entre o valor obtido $\hat{p}_{\mathrm{obs}}=0,465$ e o valor teórico $p=0,42$ poderia ser explicada por flutuações aleatórias inerentes ao processo de amostragem, com um nível de significância de $5\%$.
+Assim, concluiu que aquela amostra não havia fornecido suficiente evidência estatística para rejeitar a hipótese de que $p=0,42$.
+Ela continuou suspeitando que $p>0,42$, mas não conseguiu provar suas suspeitas.
+\end{example}
+
+O exemplo acima formalizou um conceito importante, que já aparecia implicitamente nos exemplos anteriores.
+A \textbf{região crítica} estabelece o critério para decidir se a amostra oferece evidência estatística suficiente para rejeitar $H_0$.
+Se a estatística $\hat{p}$ é tal que $\hat{p} \in RC$, então rejeitamos a hipótese nula. Caso contrário, não rejeitamos a hipótese nula.
+Dito de outra forma, quando $\hat{p} \in RC$, dizemos que há evidência estatística para rejeitar $H_0$.
+
+O teste feito nos exemplos acima era do tipo unilateral.
+Nesses testes, temos um único valor de $p_c$ e comparamos a estatística observada $\hat{p}$ com esse valor, para decidir se $H_0$ deve ser rejeitada ou não.
+Ou seja, a região crítica consistia em um único intervalo que começava em $p_c$ ou terminava em $p_c$.
+Mais formalmente, dizemos que o teste é \textbf{unilateral} se $RC$ é da forma $$RC=(-\infty, p_c]$$ ou $$RC=[p_c, +\infty).$$
+Do contrário, dizemos que o teste é \textbf{bilateral} se $RC$ é da forma $$RC=(-\infty, p_{c_1}] \cup [p_{c_2}, +\infty),$$
+com dois pontos críticos, um para rejeitar a hipótese nula ``pela esquerda'' e outro para rejeitá-la ``pela direita''.
+A formulação acima inclui intervalos semi-infinitos porque ela será usada em contextos mais gerais, apesar de que esta seção trata um caso em que a estatística de interesse está sempre em $[0,1]$.
+
+Uma outra observação importante é que a região crítica é construída supondo que $H_0$ é verdadeira.
+Apenas sua forma (unilateral, bilateral, etc.)\ leva em conta $H_1$.
+
+Finalmente, passemos a falar da grande novidade do exemplo acima:
+a possibilidade de pôr à prova uma hipótese nula que fixa o valor do parâmetro $p$, propondo como alternativa algo mais vago, que não fixa o valor de $p$ e apenas diz que ele parece ser maior, menor, ou diferente do que aquele dado pela hipótese nula.
+
+De forma mais geral, classificamos as hipóteses em dois tipos.
+Uma hipótese pode ser \textbf{simples}, se fornece uma distribuição exata para a variável em questão (como por exemplo $p=0,6$ ou $p=0,42$), ou \textbf{composta}, se é dada por uma coleção de distribuições (como por exemplo $p>0,42$).
+No caso de uma hipótese alternativa composta, não podemos falar no poder do teste como sendo um número, pois para calcular o poder é necessário especificar qual dos parâmetros incluídos em $H_1$ está sendo considerado.
+Nesse caso, consideramos a \textbf{função poder} $\pi$, que associa a cada possível valor do parâmetro populacional $p$ um valor $\pi(p)$, que é o poder do teste no caso de $p$ ser o verdadeiro parâmetro.
+A hipótese nula também poderia ser composta, mas essa situação está fora dos objetivos desta seção.
+
+Concluímos esta seção com um último exemplo.
+
+\begin{example}
+Suspeita-se que uma moeda não é equilibrada, isto é, não tem a mesma probabilidade de sair cara e coroa.
+Para pôr essa hipótese à prova, fixamos o nível de significância $\alpha=0,01$, e lançamos a moeda $n=4000$ vezes.
+Antes de lançar a moeda, vamos estabelecer a região crítica.
+Primeiro encontramos valores de referência para $z_c$ e depois convertemos para $p_c$ como no exemplo anterior, obtendo
+\[
+P(Z \leq z_{c_1})=\tfrac{\alpha}{2}
+\implies
+z_{c_1} = -2,58
+\implies
+p_{c_1} = 0,4796
+\]
+e
+\[
+P(Z \geq z_{c_2})=\tfrac{\alpha}{2}
+\implies
+z_{c_2} = 2,58
+\implies
+p_{c_2} = 0,5204
+.
+\]
+Assim, estabelecemos a região crítica
+\[
+(-\infty; 0,4796] \cup [0,5204; +\infty)
+.
+\]
+
+O gráfico da função poder ficou assim:
+
+\hfil \includegraphics[width=.5\textwidth]{poder2}
+\embedfile{figures/poder2.pdf}
+
+Imaginemos que, após lançar a moeda 4000 vezes, tenhamos observado 1915 coroas.
+Com essa observação, calculamos $\hat{p}_{\mathrm{obs}}=0,4788$.
+Como $\hat{p}_{\mathrm{obs}} \in RC$, observamos que, supondo a hipótese nula $p=\frac{1}{2}$ como verdadeira, a diferença entre $\hat{p}_{\mathrm{obs}}$ e o valor teórico $p=\frac{1}{2}$ foi grande demais para ser explicada pelas flutuações aleatórias associadas ao processo de lançamento da moeda, com um nível de significância de $1\%$.
+Assim, afirmamos haver encontrado suficiente evidência estatística para rejeitar a hipótese de que $p=\frac{1}{2}$.
+\end{example}
+
+\subsection*{Cálculos e gráficos}
+
+Abaixo incluímos códigos em R referentes aos cálculos feitos nos exemplos desta seção.
+Esses cálculos podem ser reproduzidos com uma calculadora comum e uma tabela normal padrão.
+	
+\begin{figure}[H]
+Exemplo 1
+--
+Calculando $\alpha$ e $\beta$ para $n=1000$ e $p_c=0,65$:
+\footnotesize
+\begin{verbatim}
+n  <- 1000
+pc <- 0.65
+p  <- 0.7
+zc <- (pc-p)/sqrt(p*(1-p)/n)
+zc
+# -3.450328
+pnorm(zc)
+# 0.0002799531
+p  <- 0.6
+zc <- (pc-p)/sqrt(p*(1-p)/n)
+zc
+# 3.227486
+1 - pnorm(zc)
+# 0.0006244155
+\end{verbatim}
+\end{figure}
+
+\begin{figure}[H]
+Exemplo 2
+--
+Calculando $\alpha$ para $n=100$ e $p_c=0,65$:
+\footnotesize
+\begin{verbatim}
+n  <- 100
+p  <- 0.7
+pc <- 0.65
+zc <- (pc-p)/sqrt(p*(1-p)/n)
+zc
+# -1.091089
+pnorm(zc)
+# 0.1376168
+\end{verbatim}
+\end{figure}
+
+\begin{figure}[H]
+Calculando $p_c$ para $n=100$ e $\alpha=0,001$, calculando $\beta$:
+\footnotesize
+\begin{verbatim}
+n  <- 100
+p  <- 0.7
+alpha <- 0.001
+zc <- qnorm(alpha)
+pc <- p+zc*sqrt(p*(1-p)/n)
+pc
+# 0.5583878
+p  <- 0.6
+zc <- (pc-p)/sqrt(p*(1-p)/n)
+zc
+# -0.8494062
+1 - pnorm(zc)
+# 0.8021723
+\end{verbatim}
+\end{figure}
+
+\begin{figure}[H]
+Calculando $p_c$ para $n=100$ e $\alpha=0,05$, calculando $\beta$:
+\footnotesize
+\begin{verbatim}
+n  <- 100
+p  <- 0.7
+alpha <- 0.05
+zc <- qnorm(alpha)
+pc <- p+zc*sqrt(p*(1-p)/n)
+pc
+# 0.6246233
+p  <- 0.6
+zc <- (pc-p)/sqrt(p*(1-p)/n)
+zc
+# 0.5026218
+1 - pnorm(zc)
+# 0.3076151
+\end{verbatim}
+\end{figure}
+
+\begin{figure}[H]
+Exemplo~3
+--
+Calculando $p_c$ para $n=200$, $p=0,42$ e $\alpha=0,05$:
+\footnotesize
+\begin{verbatim}
+n  <- 200
+p  <- 0.42
+alpha <- 0.05
+zc <- qnorm(1-alpha)
+pc <- p + zc*sqrt(p*(1-p)/n)
+pc
+# 0.4774052
+\end{verbatim}
+\end{figure}
+
+\begin{figure}[H]
+Gerando o gráfico da função poder:
+\footnotesize
+\begin{verbatim}
+pdf('poder1.pdf')
+p <- seq(.35,.6,.005)
+poder <- 1 - pnorm((pc-p)/sqrt(p*(1-p)/n))
+plot(p,poder,"l")
+lines(c(0.35,.42,.42),c(alpha,alpha,0),lty="dotted")
+points(.42,alpha)
+dev.off()
+\end{verbatim}
+\end{figure}
+
+\begin{figure}[H]
+Exemplo~4
+--
+Calculando $p_{c_1}$ e $p_{c_2}$ para $n=4000$, $p=\frac{1}{2}$ e $\alpha=0,01$.
+\footnotesize
+\begin{verbatim}
+n <- 4000
+alpha <- 0.01
+p <- 0.5
+zc1 <- qnorm(alpha/2)
+zc1
+# -2.575829
+pc1 <- p + zc1*sqrt(p*(1-p)/n)
+pc1
+# 0.4796363
+zc2 <- qnorm(1-alpha/2)
+zc2
+# 2.575829
+pc2 <- p + zc2*sqrt(p*(1-p)/n)
+pc2
+# 0.5203637
+\end{verbatim}
+\end{figure}
+
+\begin{figure}[H]
+Gerando o gráfico da função poder:
+\footnotesize
+\begin{verbatim}
+pdf('poder2.pdf')
+p <- seq(.45,.55,.001)
+poder <- 1 - pnorm((pc2-p)/sqrt(p*(1-p)/n)) + pnorm((pc1-p)/sqrt(p*(1-p)/n))
+plot(p,poder,"l")
+points(.5,alpha)
+dev.off()
+\end{verbatim}
+\end{figure}
+
+\section{Teste de hipótese para a média}
+
+Trabalho em andamento...
+
+\section{Teste $t$ para variância desconhecida}
+
+Trabalho em andamento...
+
+\section{Nível descritivo ou $p$-valor}
+
+Trabalho em andamento...
+
+
+\end{document}
