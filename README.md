@@ -1,5 +1,10 @@
 # Testes de Hipótese
 
+Para compilar:
+
+    pdflatex Testes-de-Hipotese.tex
+    pdflatex Testes-de-Hipotese.tex
+
 Shield: [![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
 
 This work is licensed under a
