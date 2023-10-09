@@ -1,3 +1,4 @@
+
 % !TeX spellcheck = pt_BR
 % !TEX encoding = UTF-8 Unicode
 
@@ -108,7 +109,7 @@ Departamento de Estatística, IME-USP.
 \vspace{1em}
 
 \hfil
-\href{https://creativecommons.org/licenses/by-sa/4.0/deed.pt_BR}{\includegraphics[height=4.2em]{by-sa.pdf}}
+\href{https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br}{\includegraphics[height=4.2em]{by-sa.pdf}}
 \embedfile{figures/by-sa.pdf}
 
 \vspace{1em}
@@ -173,11 +174,13 @@ Qualquer erro contido neste material é responsabilidade de: \myauthor.
 Começamos com alguns exemplos para ir introduzindo os principais conceitos envolvidos.
 
 \begin{example}
+\label{exp:facil}
 Numa cidade do interior, todos os administradores de estabelecimento com piscinas de bolinhas para crianças compram as bolinhas da Sra.~Mariana, uma mulher bem sucedida que há vários anos está à frente de uma distribuidora desses produtos.
 Das bolinhas vendidas pela distribuidora, $70\%$ são de cores bonitas e vivas (azul, verde, preto, laranja, vermelho, fúcsia, violeta, branco, etc.), e as restantes são um pouco menos vivas e bonitas (manchadas, acinzentadas, etc.).
 Pelo menos é isso o que Sra.~Mariana sempre disse, e os empresários da região sempre acreditaram.
 
-Um dia, o Sr.~Rubens descobriu que havia uma outra indústria que fabricava um produto muito parecido, porém com qualidade um pouco inferior, tendo apenas $60\%$ das bolas em cores vivas, e começou a suspeitar que a Sra.~Mariana estava distribuindo o produto dessa nova indústria.
+Um dia, o Sr.~Rubens descobriu que havia uma outra indústria que fabricava um produto muito parecido, porém com qualidade um pouco inferior, tendo apenas $60\%$ das bolas em cores vivas.
+Ele começou a suspeitar que a Sra.~Mariana estava distribuindo o produto dessa nova indústria.
 Depois de muito hesitar, o Sr.~Rubens eventualmente decidiu compartilhar sua preocupação com os demais empresários da cidade.
 
 Para colocar à prova a premissa de que a Sra.~Mariana vinha cumprindo com os parâmetros prometidos, a comunidade decidiu que deveriam tomar $n=1.000$ amostras ao acaso de um grande lote de bolinhas, e observar quantas seriam de cores vivas.
@@ -206,6 +209,7 @@ Porém, isso só foi possível graças a um grande dispêndio de recursos, o que
 Numa situação um pouco mais realística, começamos a perceber alguns conflitos e ter que tomar decisões em face de dilemas consideráveis.
 
 \begin{example}
+\label{exp:dificil}
 Continuando o exemplo anterior, a comunidade eventualmente percebeu que não tinha os recursos necessários para amostrar e analisar $1.000$ bolinhas, e pensou em fazer o mesmo experimento, porém com apenas $n=100$ amostras.
 
 Ao saber disso, a Sra.~Mariana imediatamente fez as contas, obtendo $P(\hat{p} \leq 0,65) = 0,14$. Como esperado, ela protestou, pois considerou injusto ficar à mercê de um procedimento aleatório com chances consideráveis de manchar sua reputação injustamente.
@@ -234,7 +238,7 @@ Ele esclareceu que, após a realização da amostra, haveria duas possibilidades
 Na primeira possibilidade, de $\hat{p} \leq 0,625$, ficaria estabelecido que \emph{houve suficiente evidência estatística} para rejeitar a premissa de que $70\%$ das bolinhas da Sr.~Mariana eram de cores vivas.
 Na segunda possibilidade, de $\hat{p} > 0,625$, ficaria estabelecido que \emph{não houve suficiente evidência estatística} para rejeitar a premissa.
 Nenhuma das duas possibilidades resultaria na \emph{aceitação} ou \emph{confirmação} da premissa original, muito menos permitiria rejeitar a hipótese alternativa.
-Essas ponderações o deixaram o Sr.~Rubens bem mais tranquilo.
+Essas ponderações deixaram o Sr.~Rubens bem mais tranquilo.
 Os empresários da região se sentiram muito melhor esclarecidos e agradeceram pela explicação.
 \end{example}
 
@@ -286,7 +290,7 @@ Dependendo da gravidade do erro de tipo~I, $\alpha$ costuma ser fixado como
 $0,05$, $0,01$, ou $0,001$.
 Como vimos no exemplo acima, a escolha do $\alpha$ é, de certa forma, arbitrária.
 Uma vez fixado o valor de $\alpha$, o ``ônus da prova'' ficará com $H_1$, pois a amostra deverá fornecer evidência estatística suficientemente forte para que o teste seja conclusivo na direção de rejeitar $H_0$.
-Isso pode ser muito difícil, sobretudo se $\alpha$ for muito pequeno ou o número $n$ de amostras não for grande o suficiente..
+Isso pode ser muito difícil, sobretudo se $\alpha$ for muito pequeno ou o número $n$ de amostras não for grande o suficiente.
 Por outro lado, quanto menor o valor de $\alpha$, mais significante será uma amostra que leve à rejeição de $H_0$. Isso se deve ao fato de que, à medida em que diminuímos o valor $\alpha$, mais a amostra tem que ser incompatível com $H_0$ para levar à rejeição.
 
 Vimos também no final do exemplo algumas limitações com respeito às conclusões que poderemos tirar de um teste de hipótese.
@@ -294,13 +298,14 @@ Ao rejeitar a hipótese nula, nunca vamos saber com certeza absoluta se estamos 
 Ao não rejeitar a hipótese nula, nunca vamos saber com certeza se estamos deixando de fazer uma descoberta por causa do rigor científico de haver fixado um $\alpha$ muito baixo, ou se a hipótese nula é realmente adequada para modelar a variável em questão.
 Em todo caso, o teste nunca servirá para confirmar $H_0$ nem para rejeitar $H_1$.
 
-Também vimos que prefere-se falar de \textbf{poder} do teste, que é a probabilidade de se fazer uma descoberta no caso em que $H_1$ é verdadeira, ao invés do seu complementar, que é a probabilidade de erro tipo II.
+Também vimos que prefere-se falar de \textbf{poder} do teste, que é a probabilidade de se fazer uma descoberta no caso em que $H_1$ é verdadeira, ao invés do seu complementar $\beta$, que é a probabilidade de erro tipo II.
 O poder é representado pela letra $\pi$ e é dado por $\pi = 1-\beta$.
 Uma vez que $\alpha$ está fixado, geralmente podemos aumentar o poder do teste tomando um número maior de amostras.
 
 Agora que já falamos de hipóteses nula e alternativa, do significado de rejeitar ou não rejeitar $H_0$, da diferença entre os erros de tipo I e tipo II, do nível de significância $\alpha$ e do poder $\pi$ de um teste, vamos introduzir mais alguns conceitos, novamente em forma de exemplo.
 
 \begin{example}
+\label{exp:peixes}
 Sabe-se que a proporção de machos em uma determinada espécie de peixes é de 42\%. Uma bióloga desconfia que, devido a uma alteração na composição bioquímica de um lago, essa proporção é maior.
 Assim sendo, temos
 \[
@@ -311,7 +316,7 @@ H_1:p>0,42
 \]
 Para testar sua conjectura, a bióloga decidiu que iria capturar $n=200$ peixes, observar o sexo deles, calcular a proporção $\hat{p}$ de machos nessa amostra, e comparar com algum nível de corte pré-estabelecido.
 
-Com um nível de significância de 5\%, ela calculou o ponto de corte, que ela chamou ``valor crítico'' como sendo $p_c=0,477$, e decidiu que iria rejeitar a hipótese nula caso $\hat{p} \geq 0,477$.
+Com um nível de significância de 5\%, ela calculou o ponto de corte, que ela chamou ``valor crítico'', como sendo $p_c=0,477$, e decidiu que iria rejeitar a hipótese nula caso $\hat{p} \geq 0,477$.
 Para encontrar esse valor de $p_c$, ela usou o fato de que
 \[
 \hat{p}
@@ -380,10 +385,19 @@ A hipótese nula também poderia ser composta, mas essa situação está fora do
 Concluímos esta seção com um último exemplo.
 
 \begin{example}
+\label{exp:moeda}
 Suspeita-se que uma moeda não é equilibrada, isto é, não tem a mesma probabilidade de sair cara e coroa.
-Para pôr essa hipótese à prova, fixamos o nível de significância $\alpha=0,01$, e lançamos a moeda $n=4000$ vezes.
+Nesse caso, temos:
+\[
+H_0:p=\tfrac{1}{2}
+\qquad
+H_1:p\ne\tfrac{1}{2}
+.
+\]
+Para pôr à prova a hipótese de que a moeda é equilibrada, fixamos o nível de significância $\alpha=0,01$, e lançamos a moeda $n=4000$ vezes.
 Antes de lançar a moeda, vamos estabelecer a região crítica.
-Primeiro encontramos valores de referência para $z_c$ e depois convertemos para $p_c$ como no exemplo anterior, obtendo
+Primeiro encontramos valores de referência para $z_c$ e depois convertemos para $p_c$ como no exemplo anterior.
+Nesse processo, obtemos
 \[
 P(Z \leq z_{c_1})=\tfrac{\alpha}{2}
 \implies
@@ -402,6 +416,7 @@ p_{c_2} = 0,5204
 \]
 Assim, estabelecemos a região crítica
 \[
+RC=
 (-\infty; 0,4796] \cup [0,5204; +\infty)
 .
 \]
@@ -423,7 +438,7 @@ Abaixo incluímos códigos em R referentes aos cálculos feitos nos exemplos des
 Esses cálculos podem ser reproduzidos com uma calculadora comum e uma tabela normal padrão.
 	
 \begin{figure}[H]
-Exemplo 1
+Exemplo~\ref{exp:facil}
 --
 Calculando $\alpha$ e $\beta$ para $n=1000$ e $p_c=0,65$:
 \footnotesize
@@ -446,7 +461,7 @@ zc
 \end{figure}
 
 \begin{figure}[H]
-Exemplo 2
+Exemplo~\ref{exp:dificil}
 --
 Calculando $\alpha$ para $n=100$ e $p_c=0,65$:
 \footnotesize
@@ -503,7 +518,7 @@ zc
 \end{figure}
 
 \begin{figure}[H]
-Exemplo~3
+Exemplo~\ref{exp:peixes}
 --
 Calculando $p_c$ para $n=200$, $p=0,42$ e $\alpha=0,05$:
 \footnotesize
@@ -533,7 +548,7 @@ dev.off()
 \end{figure}
 
 \begin{figure}[H]
-Exemplo~4
+Exemplo~\ref{exp:moeda}
 --
 Calculando $p_{c_1}$ e $p_{c_2}$ para $n=4000$, $p=\frac{1}{2}$ e $\alpha=0,01$.
 \footnotesize
@@ -569,15 +584,159 @@ dev.off()
 \end{verbatim}
 \end{figure}
 
+\section{Estatística $Z$}
+
+Mais adiante veremos outros tipos de testes de hipótese, que serão cada vez mais complexos.
+Na maioria das situações, o teste é feito em termos de uma \emph{estatística}, que não necessariamente é dada pelo \emph{estimador} do parâmetro que está sendo testado.
+
+Em todos os exemplos da seção anterior, a hipótese nula era $H_0:p=p_0$, e o procedimento foi o mesmo.
+Fizemos uma Amostra Aleatória Simples de tamanho $n$, que resulta na observação das variáveis $X_1,\dots,X_n$, independentes e com a mesma distribuição, Bernoulli de parâmetro $p$, sendo que a variável $X_k$ indica se a $k$-ésima amostra tem a propriedade estudada (se é uma bola amostrada é de cor viva, se o peixe capturado é macho, se a moeda lançada saiu coroa, etc.).
+
+A partir da amostra $X_1,\dots,X_n$, calculamos o estimador
+\[
+\hat{p} = \frac{X_1 + \dots + X_n}{n}
+.
+\]
+O resultado do teste é o de rejeitar a hipótese nula se o valor obseravdo do estimador está na \emph{região crítica}.
+A região crítica é calculada de forma a satisfazer
+\[
+P_{H_0}(\hat{p} \in RC) = \alpha.
+\]
+
+A \emph{estatística padronizada} para esse teste é definida como
+\[
+Z = \frac{\hat{p}-p_0}{\ \sqrt{\frac{p_0(1-p_0)}{n}}\ }
+.
+\]
+Supondo $H_0$ válida, essa estatística mede o tamanho do desvio de $\hat{p}$ em torno do seu valor esperado, medido em múltiplos do seu desvio-padrão.
+Ainda supondo $H_0$ válida, essa estatística tem distribuição bem aproximada por uma normal padrão, desde que $n$ seja suficientemente grande.
+Para os fins práticos de testes de hipótese essa aproximação é razoável quando $n \cdot p_0 \cdot (1-p_0) \geq 5$.
+A região crítica para $Z$ pode ser obtida diretamente da tabela normal, sem necessidade de fazer contas envolvendo $n$ e $p_0$.
+
+Para o Exemplo~\ref{exp:dificil}, como a hipótese alternativa era da forma $H_1:p<p_0$, o teste na estatística $Z$ tem como região crítica $(-\infty, z_c]$, onde $z_c$ é tal que $P_{H_0}(Z \leq z_c) = \alpha$.
+Como $\alpha=0,05$, da tabela normal obtemos $z_c = -1,645$.
+Esse exemplo terminou em suspense, pois não disse o que ocorreu depois que a amostra foi feita.
+
+Para o Exemplo~\ref{exp:peixes}, como a hipótese alternativa era da forma $H_1:p>p_0$, o teste na estatística $Z$ tem como região crítica $[z_c, +\infty)$, onde $z_c$ é tal que $P_{H_0}(Z \geq z_c) = \alpha$.
+Como $\alpha=0,05$, da tabela normal obtemos $z_c = 1,645$.
+Depois de coletada a amostra, observamos $\hat{p}_{\mathrm{obs}} = \frac{93}{200} = 0,465$.
+Calculando a estatística $Z$, obtemos
+\[
+z_{\mathrm{obs}} = \frac{\hat{p}_{\mathrm{obs}}-p_0}{\ \sqrt{\frac{p_0(1-p_0)}{n}}\ }
+=
+1,289
+.
+\]
+Como $z_{\mathrm{obs}} \not\in RC$, não rejeitamos a hipótese nula, ou seja, concluímos que não há suficiente evidência estatística indicando que proporção de machos tenha aumentado.
+
+Finalmente, para o Exemplo~\ref{exp:moeda}, como a hipótese alternativa era da forma $H_1:p \ne p_0$, o teste na estatística $Z$ tem como região crítica $(-\infty, -z_{c}] \cup [z_c, +\infty)$, onde $z_c$ é tal que $P_{H_0}(|Z| \geq z_c) = \alpha$.
+Como $\alpha=0,01$, da tabela normal obtemos $z_c = 2,576$.
+Depois de coletada a amostra, observamos $\hat{p}_{\mathrm{obs}} = \frac{1915}{4000} = 0,47875$.
+Calculando a estatística $Z$, obtemos
+\[
+z_{\mathrm{obs}} = \frac{\hat{p}_{\mathrm{obs}}-p_0}{\ \sqrt{\frac{p_0(1-p_0)}{n}}\ }
+=
+-2,6879
+.
+\]
+Como $z_{\mathrm{obs}} \in RC$, rejeitamos a hipótese nula, ou seja, concluímos que há suficiente evidência estatística indicando que a moeda não é equilibrada.
+
+\begin{figure}[H]
+Código em R para os cálculos desta seção:
+\footnotesize
+\begin{verbatim}
+qnorm(1 - 0.05)
+# 1.644854
+qnorm(1 - 0.01/2)
+# 2.575829
+\end{verbatim}
+\end{figure}
+
+
+\section{Nível descritivo ou $p$-valor}
+
+Revisitemos agora o Exemplo~\ref{exp:peixes}. Neste exemplo, a bióloga tinha conjecturado, baseada em estudos teóricos, que poderia haver um aumento na proporção de machos em uma espécie de peixes, devido a uma alteração na composição bioquímica de um lago. Após coletar e analisar 200 amostras, não conseguiu produzir suficiente evidência estatística para apoiar sua tese, com um nível de significância $\alpha=0,05$.
+
+Coletar as 200 amostrar para concluir que não forneciam evidência estatística suficiente foi muito frustrante.
+Essa bióloga pode agora se perguntar: o que teria ocorrido se o nível de significância tivesse sido outro?
+
+Para $\alpha=0,02$, certamente não rejeitaríamos $H_0$, já que não foi rejeitado com $\alpha=0,05$, que é maior.
+Com $\alpha=0,15$, após consultar a tabela normal e realizar os devidos cálculos, teríamos $p_c = 0,456$ e a hipótese nula teria sido rejeitada.
+Logo, com qualquer $\alpha$ maior ou igual a $0,15$, a hipótese nula teria sido rejeitada.
+
+Com $\alpha=0,07$, após consultar a tabela normal e realizar os devidos cálculos, teríamos $p_c = 0,4715$ e a hipótese nula não teria sido rejeitada.
+Logo, com qualquer $\alpha$ menor ou igual a $0,07$, a hipótese nula não teria sido rejeitada.
+
+Continuando a busca pelo menor valor de $\alpha$ que levaria à rejeição da hipótese nula, tentamos $\alpha=0,11$.
+Após consultar a tabela normal e realizar os devidos cálculos, teríamos $p_c = 0,4628$ e a hipótese nula teria sido rejeitada.
+Com $\alpha=0,09$, após consultar a tabela normal e realizar os devidos cálculos, teríamos $p_c = 0,4668$ e a hipótese nula não teria sido rejeitada.
+Logo, com qualquer $\alpha$ menor ou igual a $0,09$, a hipótese nula não teria sido rejeitada, e com qualquer $\alpha$ maior ou igual a $0,11$ a hipótese nula teria sido rejeitada.
+
+Se observamos bem, estamos buscando o menor valor de $\alpha$ que levaria à rejeição da hipótese nula usando o estimador $\hat{p}$.
+Poderíamos continuar indefinidamente com essa busca, trabalhosa e tediosa, mas podemos obter um resultado imediato a partir da estatística $Z$.
+Como $z_{\mathrm{obs}}=1,289$, podemos buscar $P(Z \geq z_{\mathrm{obs}})$ diretamente na tabela normal, sem realizar nenhum novo cálculo, obtendo assim $\hat{\alpha}=0,0987$.
+Esse valor é chamado de \emph{nível descritivo} da amostra, também conhecido com o $p$-valor.
+
+Ao invés de fixar um nível de significância $\alpha$ previamente à coleta da amostra, coletar a amostra primeiro, a bióloga pode calcular o $p$-valor $\hat{\alpha}$, e publicar seu relatório apenas com esse valor. Ficaria, então, a cargo do leitor decidir se uma amostra com esse $p$-valor é suficiente evidência estatística para rejeitar a hipótese nula de que a proporção de machos não havia sido alterada.
+
+Formalmente, o nível descritivo é definido como \emph{a probabilidade de que a amostra tinha de fornecer valores pelo menos tão extremos quanto aquele efetivamente observado}.
+
+Se a hipótese alternativa é do tipo $H_1:p>p_0$, o $p$-valor é definido como
+\[
+\hat{\alpha}
+=
+P(Z \geq z_{\mathrm{obs}})
+.
+\]
+Se a hipótese alternativa é do tipo $H_1:p < p_0$, o $p$-valor é definido como
+\[
+\hat{\alpha}
+=
+P(Z \leq z_{\mathrm{obs}})
+.
+\]
+Se a hipótese alternativa é do tipo $H_1:p \ne p_0$, o $p$-valor é definido como
+\[
+\hat{\alpha}
+=
+P(|Z| \geq |z_{\mathrm{obs}}|)
+=
+2\, P(Z \geq |z_{\mathrm{obs}}|)
+.
+\]
+
+No caso do Exemplo~\ref{exp:moeda}, como $z_{\mathrm{obs}}=-2,6879$, temos
+\[
+\hat{\alpha}_{\mathrm{obs}}
+=
+2\, P(Z \geq 2,6879)
+=
+0,0072
+.
+\]
+
+Quanto menor o $p$-valor observado, mais forte a evidência estatística contra a hipótese nula.
+
+\begin{figure}[H]
+Código em R para os cálculos desta seção:
+\footnotesize
+\begin{verbatim}
+n  <- 200; p  <- 0.42; p + qnorm( 1 - 0.09 ) * sqrt(p*(1-p)/n)
+# 0.4667922
+1 - pnorm(1.289)
+# 0.09869904
+2 * ( 1 - pnorm(2.6879) )
+# 0.007190293
+\end{verbatim}
+\end{figure}
+
+
 \section{Teste de hipótese para a média}
 
 Trabalho em andamento...
 
-\section{Teste $t$ para variância desconhecida}
 
-Trabalho em andamento...
-
-\section{Nível descritivo ou $p$-valor}
+\section{Estatística $T$}
 
 Trabalho em andamento...
 
