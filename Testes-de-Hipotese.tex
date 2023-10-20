@@ -8,7 +8,6 @@
 \newcommand{\myauthor}{Leonardo~T.~Rolla}
 
 % TROCAR PELO SEU PRÓPRIO REPOSITÓRIO:
-%\newcommand{\mysourceurl}{\url{https://github/xxxxxxxxxx}}
 \newcommand{\mysourceurl}{\url{https://github.com/rea-stat/Testes-de-Hipotese} e \url{https://www.overleaf.com/read/dkbvxdjftbbd}}
 
 \usepackage[brazil]{babel}
@@ -82,8 +81,6 @@ pdfpagemode=UseNone
 
 \graphicspath{{figures/}}
 
-\usepackage[main,input,include]{embedall}
-%Use \embedfile{xxx.pdf} to manually embed figures!
 
 \begin{document}
 
@@ -110,7 +107,6 @@ Departamento de Estatística, IME-USP.
 
 \hfil
 \href{https://creativecommons.org/licenses/by-sa/4.0/deed.pt-br}{\includegraphics[height=4.2em]{by-sa.pdf}}
-\embedfile{figures/by-sa.pdf}
 
 \vspace{1em}
 
@@ -339,7 +335,6 @@ Assim, o critério de decisão ficou sendo o seguinte: fixou-se previamente o in
 Perguntando-se sobre o poder desse teste, ela percebeu que não teria como calculá-lo, pois não sabia qual o valor de $p$ deveria considerar, dentre todas as possibilidades que compõem a hipótese alternativa. No máximo, poderia esboçar o gráfico de como seria o poder $\pi$ para distintos de $p$, obtendo a figura abaixo:
 
 \hfil \includegraphics[width=.5\textwidth]{poder1}
-\embedfile{figures/poder1.pdf}
 
 Para calcular o valor de $\pi(p)$, ela usou a fórmula
 \[
@@ -424,7 +419,6 @@ RC=
 O gráfico da função poder ficou assim:
 
 \hfil \includegraphics[width=.5\textwidth]{poder2}
-\embedfile{figures/poder2.pdf}
 
 Imaginemos que, após lançar a moeda 4000 vezes, tenhamos observado 1915 coroas.
 Com essa observação, calculamos $\hat{p}_{\mathrm{obs}}=0,4788$.
@@ -597,20 +591,21 @@ A partir da amostra $X_1,\dots,X_n$, calculamos o estimador
 \hat{p} = \frac{X_1 + \dots + X_n}{n}
 .
 \]
-O resultado do teste é o de rejeitar a hipótese nula se o valor obseravdo do estimador está na \emph{região crítica}.
 A região crítica é calculada de forma a satisfazer
 \[
 P_{H_0}(\hat{p} \in RC) = \alpha.
 \]
+O resultado do teste é o de rejeitar a hipótese nula se o valor observado do estimador $\hat{p}$ está na região crítica.
 
-A \emph{estatística padronizada} para esse teste é definida como
+Vejamos agora como seria esse teste usando uma \emph{estatística padronizada} no lugar de um estimador.
+A estatística para o teste de proporções é definida como
 \[
 Z = \frac{\hat{p}-p_0}{\ \sqrt{\frac{p_0(1-p_0)}{n}}\ }
 .
 \]
 Supondo $H_0$ válida, essa estatística mede o tamanho do desvio de $\hat{p}$ em torno do seu valor esperado, medido em múltiplos do seu desvio-padrão.
 Ainda supondo $H_0$ válida, essa estatística tem distribuição bem aproximada por uma normal padrão, desde que $n$ seja suficientemente grande.
-Para os fins práticos de testes de hipótese essa aproximação é razoável quando $n \cdot p_0 \cdot (1-p_0) \geq 5$.
+Para os fins práticos de testes de hipótese, essa aproximação é razoável quando $n \cdot p_0 \cdot (1-p_0) \geq 5$.
 A região crítica para $Z$ pode ser obtida diretamente da tabela normal, sem necessidade de fazer contas envolvendo $n$ e $p_0$.
 
 Para o Exemplo~\ref{exp:dificil}, como a hipótese alternativa era da forma $H_1:p<p_0$, o teste na estatística $Z$ tem como região crítica $(-\infty, z_c]$, onde $z_c$ é tal que $P_{H_0}(Z \leq z_c) = \alpha$.
@@ -672,12 +667,12 @@ Após consultar a tabela normal e realizar os devidos cálculos, teríamos $p_c 
 Com $\alpha=0,09$, após consultar a tabela normal e realizar os devidos cálculos, teríamos $p_c = 0,4668$ e a hipótese nula não teria sido rejeitada.
 Logo, com qualquer $\alpha$ menor ou igual a $0,09$, a hipótese nula não teria sido rejeitada, e com qualquer $\alpha$ maior ou igual a $0,11$ a hipótese nula teria sido rejeitada.
 
-Se observamos bem, estamos buscando o menor valor de $\alpha$ que levaria à rejeição da hipótese nula usando o estimador $\hat{p}$.
+Se observamos bem, estamos buscando o menor valor de $\alpha$ que levaria à rejeição da hipótese nula.
 Poderíamos continuar indefinidamente com essa busca, trabalhosa e tediosa, mas podemos obter um resultado imediato a partir da estatística $Z$.
-Como $z_{\mathrm{obs}}=1,289$, podemos buscar $P(Z \geq z_{\mathrm{obs}})$ diretamente na tabela normal, sem realizar nenhum novo cálculo, obtendo assim $\hat{\alpha}=0,0987$.
+Como $z_{\mathrm{obs}}=1,289$, podemos buscar $\hat{\alpha}=P(Z \geq z_{\mathrm{obs}})$ diretamente na tabela normal, sem realizar nenhum novo cálculo, obtendo $\hat{\alpha}=0,0987$.
 Esse valor é chamado de \emph{nível descritivo} da amostra, também conhecido com o $p$-valor.
 
-Ao invés de fixar um nível de significância $\alpha$ previamente à coleta da amostra, coletar a amostra primeiro, a bióloga pode calcular o $p$-valor $\hat{\alpha}$, e publicar seu relatório apenas com esse valor. Ficaria, então, a cargo do leitor decidir se uma amostra com esse $p$-valor é suficiente evidência estatística para rejeitar a hipótese nula de que a proporção de machos não havia sido alterada.
+Ao invés de fixar um nível de significância $\alpha$ previamente à coleta da amostra, a bióloga poderia ter coletado a amostra primeiro, depois calcular o $p$-valor $\hat{\alpha}$, e publicar seu relatório apenas com esse valor. Ficaria, então, a cargo do leitor decidir se uma amostra com esse $p$-valor é suficiente evidência estatística para rejeitar a hipótese nula de que a proporção de machos não havia sido alterada.
 
 Formalmente, o nível descritivo é definido como \emph{a probabilidade de que a amostra tinha de fornecer valores pelo menos tão extremos quanto aquele efetivamente observado}.
 
